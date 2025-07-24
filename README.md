@@ -1,1 +1,5 @@
-test
+- git clone https://github.com/Xneine/bootcamp-devops-dla-ss001-alan
+- git checkout feature
+- cd bootcamp-devops-dla-ss001-alan/src/nginx-xneine/ 
+- docker compose up -d
+- open in http://127.0.0.1:8888
