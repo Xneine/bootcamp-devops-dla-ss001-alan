@@ -1,0 +1,16 @@
+services:
+  nginx-porto:
+    image: nginx:latest
+    container_name: nginx-porto
+    ports:
+      - "127.0.0.1:8888:80"
+    networks:
+      - porto-net
+    volumes:
+      - ./www:/usr/share/nginx/html
+    restart: always
+
+networks:
+  porto-net:
+    name: porto-net
+    driver: bridge
