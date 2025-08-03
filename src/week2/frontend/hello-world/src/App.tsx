@@ -5,7 +5,7 @@ function App() {
   const [greet, setGreet] = useState("");
   async function sayHello() {
     try {
-      const response = await fetch("http://localhost:3000/hello");
+      const response = await fetch("http://localhost:3002/hello");
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
