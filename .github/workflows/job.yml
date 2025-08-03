@@ -57,12 +57,12 @@ jobs:
         run: |
           docker buildx build \
             --platform linux/amd64 \
-            -t ${{ secrets.DOCKERHUB_USERNAME }}/myapp-backend:latest \
+            -t ${{ secrets.DOCKERHUB_USERNAME }}/bootcamp-devops-alan-backend:v2 \
             --push src/week2/backend
 
       - name: Build & Push Frontend Image
         run: |
           docker buildx build \
             --platform linux/amd64 \
-            -t ${{ secrets.DOCKERHUB_USERNAME }}/myapp-frontend:latest \
+            -t ${{ secrets.DOCKERHUB_USERNAME }}/bootcamp-devops-alan-frontend:v2 \
             --push src/week2/frontend/hello-world
