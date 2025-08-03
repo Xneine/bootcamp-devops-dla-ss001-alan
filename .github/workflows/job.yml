@@ -24,7 +24,7 @@ jobs:
         run: |
           docker build \
             -t backend-temp:latest \
-            -f src/week2/backend/Dockerfile .
+            -f src/week2/backend/Dockerfile src/week2/backend
 
       - name: Build Frontend Image (local)
         run: |
@@ -56,7 +56,7 @@ jobs:
             --platform linux/amd64 \
             -t ${{ secrets.DOCKERHUB_USERNAME }}/myapp-backend:latest \
             -f src/week2/backend/Dockerfile \
-            --push .
+            --push src/week2/backend
 
       - name: Build & Push Frontend Image
         run: |
