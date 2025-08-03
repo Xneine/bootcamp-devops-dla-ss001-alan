@@ -30,7 +30,7 @@ jobs:
         run: |
           docker build \
             -t frontend-temp:latest \
-            -f src/week2/frontend/Dockerfile .
+            -f src/week2/frontend/Dockerfile src/week2/frontend
 
   push:
     name: Push Docker Images to DockerHub
@@ -64,4 +64,4 @@ jobs:
             --platform linux/amd64 \
             -t ${{ secrets.DOCKERHUB_USERNAME }}/myapp-frontend:latest \
             -f src/week2/frontend/Dockerfile \
-            --push .
+            --push src/week2/frontend
