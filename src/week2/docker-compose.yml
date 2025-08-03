@@ -1,0 +1,22 @@
+services:
+  frontend:
+    build:
+      context: ./frontend/hello-world
+      dockerfile: Dockerfile
+    ports:
+      - "5173:80"
+    networks:
+      - debug-life-week2-networks
+  
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "3002:3000"
+    networks:
+      - debug-life-week2-networks
+  
+networks:
+  debug-life-week2-networks:
+    driver: bridge

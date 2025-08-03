@@ -1,6 +1,9 @@
 name: Build and Push Backend & Frontend Images
 
 on:
+  pull_request:
+    branches:
+      - main
   push:
     branches:
       - main
@@ -21,13 +24,13 @@ jobs:
         run: |
           docker build \
             -t backend-temp:latest \
-            -f src/week2/backend/Dockerfile .
+            -f src/week2/backend/Dockerfile src/week2/backend
 
       - name: Build Frontend Image (local)
         run: |
           docker build \
             -t frontend-temp:latest \
-            -f src/week2/frontend/Dockerfile .
+            -f src/week2/frontend/hello-world/Dockerfile src/week2/frontend/hello-world
 
   push:
     name: Push Docker Images to DockerHub
@@ -41,6 +44,9 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
+      - name: Create and use builder
+        run: docker buildx create --use
+
       - name: Login to DockerHub
         uses: docker/login-action@v3
         with:
@@ -51,14 +57,12 @@ jobs:
         run: |
           docker buildx build \
             --platform linux/amd64 \
-            -t ${{ secrets.DOCKERHUB_USERNAME }}/myapp-backend:latest \
-            -f src/week2/backend/Dockerfile \
-            --push .
+            -t ${{ secrets.DOCKERHUB_USERNAME }}/bootcamp-devops-alan-backend:v2 \
+            --push src/week2/backend
 
       - name: Build & Push Frontend Image
         run: |
           docker buildx build \
             --platform linux/amd64 \
-            -t ${{ secrets.DOCKERHUB_USERNAME }}/myapp-frontend:latest \
-            -f src/week2/frontend/Dockerfile \
-            --push .
+            -t ${{ secrets.DOCKERHUB_USERNAME }}/bootcamp-devops-alan-frontend:v2 \
+            --push src/week2/frontend/hello-world
